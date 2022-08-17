@@ -174,6 +174,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
+
+        // Intervention image
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -226,6 +230,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        // Intervention images
+        
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

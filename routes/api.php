@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Resources\ResumeResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Resume;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/resumes', fn() => new ResumeResource(auth()->user()->resumes->all()))->middleware('auth:sanctum');
+
+Route::get('/resumes/{resume}', function(Resume $resume) {
+    if (auth()->user()->id != $resume->user->id) {
+        return response(status: 403)->json(['message' => 'Unauthorized']);
+    }
+    return new ResumeResource($resume);
+})->middleware('auth:sanctum');
